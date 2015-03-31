@@ -21,9 +21,29 @@
       </div>
     </div>
     
-    <div class="row">
-        <a href = "connect.php"><div  name="List of Battles" class="small button">List of Battles</div></a>
-    </div>
+    <form method="post" action="result.php">
+        <div class="row">
+        <div class="large-12 columns">
+          <input type="radio" name="query" value="listBattles" ><label for="query">List of Battles</label>
+        </div>
+        <div class="large-12 columns">
+          <input type="radio" name="query" value="longestBattle"><label for="query">Longest Battle</label>
+        </div>
+        <div class="large-12 columns">
+          <input type="radio" name="query" value="shortestBattle"><label for="query">Shortest Battle</label>
+        </div>
+        <div class="large-12 columns">
+          <input type="radio" name="query" value="mostForces"><label for="query">Highest Number of Soldiers</label>
+        </div>
+        <div class="large-12 columns">
+          <input type="radio" name="query" value="mostParticipants"><label for="query">Highest Number of Participants</label>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <input type ="submit" <div  name="submit" class="small button"></div></input>
+            </div>
+        </div>
+    </form>
     
     <script src="js/foundation.min.js"></script>
     <script>
