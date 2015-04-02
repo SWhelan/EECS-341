@@ -38,6 +38,10 @@
         <div class="large-12 columns">
           <input type="radio" name="query" value="mostParticipants"><label for="query">Highest Number of Participants</label>
         </div>
+        <div class="large-12 columns">
+          <input type="radio" name="query" value="byLocation"><label for="query">Battles in Location:</label>
+          <input type="textbox" name="location" placeholder="enter location...">
+        </div>
         <div class="row">
             <div class="large-12 columns">
                 <input type ="submit" <div  name="submit" class="small button"></div></input>

@@ -68,6 +68,20 @@ ORDER BY forces.force_size DESC";
             $html .= '<tr><td>' . $battle["start_date"] . '</td><td>' . $battle["end_date"] . '</td><td>' . $battle["title"] . '</td><td>' . $battle["location"] . '</td><td>' . $battle["participant_count"] . '</td></tr>';
         }
         $html .= "</table>";
+    } else if($_POST['query'] == "byLocation"){
+        $location = mysqli_real_escape_string($db, $_POST['location']);
+        $title = "List of Battles in Location: " . $location;
+        $sql = "SELECT *  FROM battle as b WHERE b.location LIKE '%".$location."%'";
+        
+        $html = "<table><tr><th>Start Date</th><th>End Date</th><th>Title</th><th>Location</th></tr>";
+        
+        if(!$result = $db->query($sql)){
+            die('There was an error running the query [' . $db->error . ']');
+        }
+        while($battle = $result->fetch_assoc()){
+            $html .= '<tr><td>' . $battle["start_date"] . '</td><td>' . $battle["end_date"] . '</td><td>' . $battle["title"] . '</td><td>' . $battle["location"] . '</td></tr>';
+        }
+        $html .= "</table>";
     }
 
 
