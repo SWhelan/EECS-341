@@ -82,7 +82,91 @@ ORDER BY forces.force_size DESC";
             $html .= '<tr><td>' . $battle["start_date"] . '</td><td>' . $battle["end_date"] . '</td><td>' . $battle["title"] . '</td><td>' . $battle["location"] . '</td></tr>';
         }
         $html .= "</table>";
-    }
+    } else if($_POST['query'] == "winsByParticipant"){
+        $participant = mysqli_real_escape_string($db, $_POST['participant']);
+        $sql = "SELECT p.name, COUNT(p.pid) as num_wins FROM participant as p, participates_in_battle as pib WHERE pib.participant_id = p.pid AND p.pid = ".$participant. " AND pib.status = 'win' GROUP BY p.name";
+    
+        $html = "<table><tr><th>Participant Name</th><th>Number of Wins</th></tr>";
+        
+        if(!$result = $db->query($sql)){
+            die('There was an error running the query [' . $db->error . ']');
+        }
+        while($part = $result->fetch_assoc()){
+            $title = "Number of Wins per Participant: " . $part['name'];
+            $html .= '<tr><td>' . $part["name"] . '</td><td>' . $part["num_wins"] . '</td></tr>';
+        }
+        $html .= "</table>";
+    } else if($_POST['query'] == "lossesByParticipant"){
+        $participant = mysqli_real_escape_string($db, $_POST['participant']);
+        $sql = "SELECT p.name, COUNT(p.pid) as num_losses FROM participant as p, participates_in_battle as pib WHERE pib.participant_id = p.pid AND p.pid = ".$participant. " AND pib.status = 'lose' GROUP BY p.name";
+    
+        $html = "<table><tr><th>Participant Name</th><th>Number of Losses</th></tr>";
+        
+        if(!$result = $db->query($sql)){
+            die('There was an error running the query [' . $db->error . ']');
+        }
+        while($part = $result->fetch_assoc()){
+            $title = "Number of Losses per Participant: " . $part['name'];
+            $html .= '<tr><td>' . $part["name"] . '</td><td>' . $part["num_losses"] . '</td></tr>';
+        }
+        $html .= "</table>";
+    } else if($_POST['query'] == "highCasualtiesLoss"){
+        $title = "Losing Battle With Highest Number of Casualties";
+        $sql = "SELECT p.name, b.title, b.location, b.start_date, b.end_date, pib.num_casualties
+FROM participates_in_battle as pib, participant as p, battle as b
+WHERE p.pid = pib.participant_id AND b.bid = pib.battle_id AND pib.status = 'lose' AND pib.num_casualties = (SELECT MAX(pib.num_casualties) FROM participates_in_battle as pib, participant as p WHERE status = 'lose')";
+    
+        if(!$result = $db->query($sql)){
+            die('There was an error running the query [' . $db->error . ']');
+        }
+        $html = "<table><tr><th>Start Date</th><th>End Date</th><th>Title</th><th>Location</th><th>Participant</th><th>Num Casualties</th></tr>";
+        while($battle = $result->fetch_assoc()){
+            $html .= '<tr><td>' . $battle["start_date"] . '</td><td>' . $battle["end_date"] . '</td><td>' . $battle["title"] . '</td><td>' . $battle["location"] . '</td><td>' . $battle["name"] . '</td><td>' . $battle["num_casualties"] . '</td></tr>';
+        }
+        $html .= "</table>";
+    } else if($_POST['query'] == "highCasualtiesWin"){
+        $title = "Winning Battle With Highest Number of Casualties";
+        $sql = "SELECT p.name, b.title, b.location, b.start_date, b.end_date, pib.num_casualties
+FROM participates_in_battle as pib, participant as p, battle as b
+WHERE p.pid = pib.participant_id AND b.bid = pib.battle_id AND pib.status = 'win' AND pib.num_casualties = (SELECT MAX(pib.num_casualties) FROM participates_in_battle as pib, participant as p WHERE status = 'win')";
+    
+        if(!$result = $db->query($sql)){
+            die('There was an error running the query [' . $db->error . ']');
+        }
+        $html = "<table><tr><th>Start Date</th><th>End Date</th><th>Title</th><th>Location</th><th>Participant</th><th>Num Casualties</th></tr>";
+        while($battle = $result->fetch_assoc()){
+            $html .= '<tr><td>' . $battle["start_date"] . '</td><td>' . $battle["end_date"] . '</td><td>' . $battle["title"] . '</td><td>' . $battle["location"] . '</td><td>' . $battle["name"] . '</td><td>' . $battle["num_casualties"] . '</td></tr>';
+        }
+        $html .= "</table>";
+    } else if($_POST['query'] == "lowCasualtiesLoss"){
+        $title = "Losing Battle With Lowest Number of Casualties";
+        $sql = "SELECT p.name, b.title, b.location, b.start_date, b.end_date, pib.num_casualties
+FROM participates_in_battle as pib, participant as p, battle as b
+WHERE p.pid = pib.participant_id AND b.bid = pib.battle_id AND pib.status = 'lose' AND pib.num_casualties = (SELECT MIN(pib.num_casualties) FROM participates_in_battle as pib, participant as p WHERE status = 'lose')";
+    
+        if(!$result = $db->query($sql)){
+            die('There was an error running the query [' . $db->error . ']');
+        }
+        $html = "<table><tr><th>Start Date</th><th>End Date</th><th>Title</th><th>Location</th><th>Participant</th><th>Num Casualties</th></tr>";
+        while($battle = $result->fetch_assoc()){
+            $html .= '<tr><td>' . $battle["start_date"] . '</td><td>' . $battle["end_date"] . '</td><td>' . $battle["title"] . '</td><td>' . $battle["location"] . '</td><td>' . $battle["name"] . '</td><td>' . $battle["num_casualties"] . '</td></tr>';
+        }
+        $html .= "</table>";
+    } else if($_POST['query'] == "lowCasualtiesWin"){
+        $title = "Winning Battle With Lowest Number of Casualties";
+        $sql = "SELECT p.name, b.title, b.location, b.start_date, b.end_date, pib.num_casualties
+FROM participates_in_battle as pib, participant as p, battle as b
+WHERE p.pid = pib.participant_id AND b.bid = pib.battle_id AND pib.status = 'win' AND pib.num_casualties = (SELECT MIN(pib.num_casualties) FROM participates_in_battle as pib, participant as p WHERE status = 'win')";
+    
+        if(!$result = $db->query($sql)){
+            die('There was an error running the query [' . $db->error . ']');
+        }
+        $html = "<table><tr><th>Start Date</th><th>End Date</th><th>Title</th><th>Location</th><th>Participant</th><th>Num Casualties</th></tr>";
+        while($battle = $result->fetch_assoc()){
+            $html .= '<tr><td>' . $battle["start_date"] . '</td><td>' . $battle["end_date"] . '</td><td>' . $battle["title"] . '</td><td>' . $battle["location"] . '</td><td>' . $battle["name"] . '</td><td>' . $battle["num_casualties"] . '</td></tr>';
+        }
+        $html .= "</table>";
+    } 
 
 
       

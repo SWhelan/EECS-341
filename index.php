@@ -39,8 +39,49 @@
           <input type="radio" name="query" value="mostParticipants"><label for="query">Highest Number of Participants</label>
         </div>
         <div class="large-12 columns">
+          <input type="radio" name="query" value="highCasualtiesLoss"><label for="query">Highest Number of Casualties in a Losing Battle</label>
+        </div>
+        <div class="large-12 columns">
+          <input type="radio" name="query" value="highCasualtiesWin"><label for="query">Highest Number of Casualties in a Winning Battle</label>
+        </div>
+        <div class="large-12 columns">
+          <input type="radio" name="query" value="lowCasualtiesLoss"><label for="query">Lowest Number of Casualties in a Losing Battle</label>
+        </div>
+        <div class="large-12 columns">
+          <input type="radio" name="query" value="lowCasualtiesWin"><label for="query">Lowest Number of Casualties in a Winning Battle</label>
+        </div>
+        <div class="large-12 columns">
           <input type="radio" name="query" value="byLocation"><label for="query">Battles in Location:</label>
           <input type="textbox" name="location" placeholder="enter location...">
+        </div>
+        <div class ="large-12 columns">
+            <input type="radio" name="query" value="winsByParticipant"><label for="query">Number of Wins by Participant:</label>
+        </div>
+        <div class ="large-12 columns">
+            <input type="radio" name="query" value="lossesByParticipant"><label for="query">Number of Losses by Participant:</label>
+        </div>
+        <div class = "large-12 columns">
+            <label>Participant
+                <select name = "participant">
+                <?php 
+                    $db = new mysqli('localhost','read_only','password','341Project');
+
+                    if ($db->connect_errno > 0) {
+                        die('Could not connect: ' . $db->connect_error);
+                    }
+                    $sql = "SELECT * FROM participant";
+                    
+                    if(!$result = $db->query($sql)){
+                        die('There was an error running the query [' . $db->error . ']');
+                    }
+                    while($participant = $result->fetch_assoc()){
+                        echo("<option value=\"".$participant['pid']."\">".$participant['name']."</option>");
+                    }
+                    $result->free();
+                    $db->close();
+                ?>
+                </select>
+            </label>
         </div>
         <div class="row">
             <div class="large-12 columns">
