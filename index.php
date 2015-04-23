@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>War Database</title>
+    <title>World War I</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <script src="js/vendor/modernizr.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
@@ -12,7 +12,7 @@
     
     <div class="row">
       <div class="large-12 columns">
-        <h1>Welcome</h1>
+        <h1>A Database Approach to World War I</h1>
       </div>
     </div>
         <div class="row">
@@ -24,32 +24,21 @@
     <form method="post" action="result.php">
         <div class="row">
         <div class="large-12 columns">
-          <input type="radio" name="query" value="listBattles" ><label for="query">List of Battles</label>
+          <input type="radio" name="query" value="showAllQueries" ><label for="query">List of All SQL Queries</label>
         </div>
-        <div class="large-12 columns">
-          <input type="radio" name="query" value="longestBattle"><label for="query">Longest Battle</label>
-        </div>
-        <div class="large-12 columns">
-          <input type="radio" name="query" value="shortestBattle"><label for="query">Shortest Battle</label>
-        </div>
-        <div class="large-12 columns">
-          <input type="radio" name="query" value="mostForces"><label for="query">Highest Number of Soldiers</label>
-        </div>
-        <div class="large-12 columns">
-          <input type="radio" name="query" value="mostParticipants"><label for="query">Highest Number of Participants</label>
-        </div>
-        <div class="large-12 columns">
-          <input type="radio" name="query" value="highCasualtiesLoss"><label for="query">Highest Number of Casualties in a Losing Battle</label>
-        </div>
-        <div class="large-12 columns">
-          <input type="radio" name="query" value="highCasualtiesWin"><label for="query">Highest Number of Casualties in a Winning Battle</label>
-        </div>
-        <div class="large-12 columns">
-          <input type="radio" name="query" value="lowCasualtiesLoss"><label for="query">Lowest Number of Casualties in a Losing Battle</label>
-        </div>
-        <div class="large-12 columns">
-          <input type="radio" name="query" value="lowCasualtiesWin"><label for="query">Lowest Number of Casualties in a Winning Battle</label>
-        </div>
+        <?php
+            require("queries.php");
+            $i = 0;
+            $queries = getStaticQueries();
+            $keys = array_keys($queries);
+            foreach($queries as $query){
+               echo('
+                <div class="large-12 columns">
+                    <input type="radio" name="query" value="'.$keys[$i].'" ><label for="query">'. $query["title"].'</label>
+                </div>');
+                $i++;
+            }
+        ?>
         <div class="large-12 columns">
           <input type="radio" name="query" value="byLocation"><label for="query">Battles in Location:</label>
           <input type="textbox" name="location" placeholder="enter location...">
