@@ -10,18 +10,8 @@
     </head>
   <body>
     
-    <div class="row">
-      <div class="large-12 columns">
-        <h1>A Database Approach to World War I</h1>
-      </div>
-    </div>
-    <div class="row">
-        <div class="large-12 columns">
-            <a href = "/341/index.php"><div class="small button">Static Queries</div></a>
-            <a href = "/341/dynamicIndex.php"><div class="small button">Dynamic Queries</div></a>
-            <a href = "/341/createYourOwn.php"><div class="small button">User Generated Queries</div></a>
-        </div>
-    </div>
+    <?php require("templates.php");?>
+    <?php echo(getHeader());?>
     
     <div class="row">
       <div class="large-12 columns">
@@ -42,85 +32,19 @@
         <div class ="large-12 columns">
             <input type="radio" name="query" value="winsByParticipant"><label for="query">Number of Wins by Participant:</label>
                             <div class = "row">
-        <div class = "large-6 columns">
-            <label>Participant
-                <select name = "participant1">
-                <?php 
-                    $db = new mysqli('localhost','read_only','password','341Project');
-
-                    if ($db->connect_errno > 0) {
-                        die('Could not connect: ' . $db->connect_error);
-                    }
-                    $sql = "SELECT * FROM participant";
-                    
-                    if(!$result = $db->query($sql)){
-                        die('There was an error running the query [' . $db->error . ']');
-                    }
-                    while($participant = $result->fetch_assoc()){
-                        echo("<option value=\"".$participant['pid']."\">".$participant['name']."</option>");
-                    }
-                    $result->free();
-                    $db->close();
-                ?>
-                </select>
-            </label>
-        </div>
+        <?php echo(getDropdown("participant1")); ?>
         </div>
         </div>
         <div class ="large-12 columns">
             <input type="radio" name="query" value="lossesByParticipant"><label for="query">Number of Losses by Participant:</label>
                     <div class = "row">
-        <div class = "large-6 columns">
-            <label>Participant
-                <select name = "participant2">
-                <?php 
-                    $db = new mysqli('localhost','read_only','password','341Project');
-
-                    if ($db->connect_errno > 0) {
-                        die('Could not connect: ' . $db->connect_error);
-                    }
-                    $sql = "SELECT * FROM participant";
-                    
-                    if(!$result = $db->query($sql)){
-                        die('There was an error running the query [' . $db->error . ']');
-                    }
-                    while($participant = $result->fetch_assoc()){
-                        echo("<option value=\"".$participant['pid']."\">".$participant['name']."</option>");
-                    }
-                    $result->free();
-                    $db->close();
-                ?>
-                </select>
-            </label>
-        </div>
+<?php echo(getDropdown("participant2")); ?>
         </div>
         </div>
                 <div class ="large-12 columns">
             <input type="radio" name="query" value="battlesByParticipant"><label for="query">Battles fought by Participant:</label>
                     <div class = "row">
-        <div class = "large-6 columns">
-            <label>Participant
-                <select name = "participant3">
-                <?php 
-                    $db = new mysqli('localhost','read_only','password','341Project');
-
-                    if ($db->connect_errno > 0) {
-                        die('Could not connect: ' . $db->connect_error);
-                    }
-                    $sql = "SELECT * FROM participant";
-                    
-                    if(!$result = $db->query($sql)){
-                        die('There was an error running the query [' . $db->error . ']');
-                    }
-                    while($participant = $result->fetch_assoc()){
-                        echo("<option value=\"".$participant['pid']."\">".$participant['name']."</option>");
-                    }
-                    $result->free();
-                    $db->close();
-                ?>
-                </select>
-            </label>
-        </div>
+<?php echo(getDropdown("participant3")); ?>
         </div>
         </div>
             <div class="large-12 columns">

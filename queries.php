@@ -77,7 +77,7 @@
         $queries['battlesByParticipant'] = array();
         $queries['battlesByParticipant']['userInput'] = mysqli_real_escape_string($db, $_POST['participant3']);
         $queries['battlesByParticipant']['title'] = "Battles per Participant";
-        $queries['battlesByParticipant']['sql'] = "SELECT p.name, b.title, b.location, pib.num_casualties, pib.status FROM participant as p, participates_in_battle as pib, battle as b WHERE pib.participant_id = p.pid AND p.pid = ".$queries['winsByParticipant']['userInput']. " AND pib.battle_id = b.bid";
+        $queries['battlesByParticipant']['sql'] = "SELECT p.name, b.title, b.location, pib.num_casualties, pib.status FROM participant as p, participates_in_battle as pib, battle as b WHERE pib.participant_id = p.pid AND p.pid = ".$queries['battlesByParticipant']['userInput']. " AND pib.battle_id = b.bid";
         
         return $queries;
     }

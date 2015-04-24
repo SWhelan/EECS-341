@@ -1,6 +1,7 @@
 <?php 
 if(isset($_POST)){
     require("queries.php");
+    require("templates.php");
     
     //    new mysqli('server'   ,'username' ,'password','db name');
     $db = new mysqli('localhost','read_only','password','341Project');
@@ -88,13 +89,7 @@ if(isset($_POST)){
         <h1>A Database Approach to World War I</h1>
       </div>
     </div>
-    <div class="row">
-        <div class="large-12 columns">
-            <a href = "/341/index.php"><div class="small button">Static Queries</div></a>
-            <a href = "/341/dynamicIndex.php"><div class="small button">Dynamic Queries</div></a>
-            <a href = "/341/createYourOwn.php"><div class="small button">User Generated Queries</div></a>
-        </div>
-    </div>
+    <?php echo(getHeader());?>
     <div class="row">
       <div class="large-12 columns">
         <h1><?php echo($title);?></h1>

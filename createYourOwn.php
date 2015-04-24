@@ -10,18 +10,8 @@
     </head>
   <body>
     
-    <div class="row">
-      <div class="large-12 columns">
-        <h1>A Database Approach to World War I</h1>
-      </div>
-    </div>
-    <div class="row">
-        <div class="large-12 columns">
-            <a href = "/341/index.php"><div class="small button">Static Queries</div></a>
-            <a href = "/341/dynamicIndex.php"><div class="small button">Dynamic Queries</div></a>
-            <a href = "/341/createYourOwn.php"><div class="small button">User Generated Queries</div></a>
-        </div>
-    </div>
+  <?php require("templates.php");?>
+    <?php echo(getHeader());?>
     
     <div class="row">
       <div class="large-12 columns">
