@@ -41,14 +41,10 @@
         </div>
         <div class ="large-12 columns">
             <input type="radio" name="query" value="winsByParticipant"><label for="query">Number of Wins by Participant:</label>
-        </div>
-        <div class ="large-12 columns">
-            <input type="radio" name="query" value="lossesByParticipant"><label for="query">Number of Losses by Participant:</label>
-        </div>
-        <div class = "row">
+                            <div class = "row">
         <div class = "large-6 columns">
             <label>Participant
-                <select name = "participant">
+                <select name = "participant1">
                 <?php 
                     $db = new mysqli('localhost','read_only','password','341Project');
 
@@ -70,7 +66,63 @@
             </label>
         </div>
         </div>
-        <div class="row">
+        </div>
+        <div class ="large-12 columns">
+            <input type="radio" name="query" value="lossesByParticipant"><label for="query">Number of Losses by Participant:</label>
+                    <div class = "row">
+        <div class = "large-6 columns">
+            <label>Participant
+                <select name = "participant2">
+                <?php 
+                    $db = new mysqli('localhost','read_only','password','341Project');
+
+                    if ($db->connect_errno > 0) {
+                        die('Could not connect: ' . $db->connect_error);
+                    }
+                    $sql = "SELECT * FROM participant";
+                    
+                    if(!$result = $db->query($sql)){
+                        die('There was an error running the query [' . $db->error . ']');
+                    }
+                    while($participant = $result->fetch_assoc()){
+                        echo("<option value=\"".$participant['pid']."\">".$participant['name']."</option>");
+                    }
+                    $result->free();
+                    $db->close();
+                ?>
+                </select>
+            </label>
+        </div>
+        </div>
+        </div>
+                <div class ="large-12 columns">
+            <input type="radio" name="query" value="battlesByParticipant"><label for="query">Battles fought by Participant:</label>
+                    <div class = "row">
+        <div class = "large-6 columns">
+            <label>Participant
+                <select name = "participant3">
+                <?php 
+                    $db = new mysqli('localhost','read_only','password','341Project');
+
+                    if ($db->connect_errno > 0) {
+                        die('Could not connect: ' . $db->connect_error);
+                    }
+                    $sql = "SELECT * FROM participant";
+                    
+                    if(!$result = $db->query($sql)){
+                        die('There was an error running the query [' . $db->error . ']');
+                    }
+                    while($participant = $result->fetch_assoc()){
+                        echo("<option value=\"".$participant['pid']."\">".$participant['name']."</option>");
+                    }
+                    $result->free();
+                    $db->close();
+                ?>
+                </select>
+            </label>
+        </div>
+        </div>
+        </div>
             <div class="large-12 columns">
                 <input type ="submit" <div  name="submit" class="small button"></div></input>
             </div>

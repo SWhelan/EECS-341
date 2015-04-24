@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html class="no-js" lang="en">
   <head>
     <meta charset="utf-8" />
@@ -38,12 +38,17 @@
         <div class="large-12 columns">
           <input type="hidden" name="type" value="userQuery">
         </div>
-        <div class="row">
             <div class="large-12 columns">
                 <input type ="submit" <div  name="submit" class="small button"></div></input>
             </div>
         </div>
     </form>
+    <div class="row">
+        <div class="large-12 columns">
+          <p>For your convenience here is the schema with the attributes of each relation and foreign key constraints in an easier to view format.</p>
+          <img src="/341/schema.jpg" name="schema"></textarea>
+        </div>
+    </div>
     
     <script src="js/foundation.min.js"></script>
     <script>

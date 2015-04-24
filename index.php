@@ -48,7 +48,6 @@
             }
         ?>
         <input type="hidden" name="type" value="static">
-        <div class="row">
             <div class="large-12 columns">
                 <input type ="submit" <div  name="submit" class="small button"></div></input>
             </div>

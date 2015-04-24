@@ -5,6 +5,7 @@ if(isset($_POST)){
     //    new mysqli('server'   ,'username' ,'password','db name');
     $db = new mysqli('localhost','read_only','password','341Project');
     $result = "";
+    $error = "";
     if($_POST['type'] == 'static'){
         $queries = getStaticQueries();
         $hrefBack = 'index.php';    
@@ -24,32 +25,35 @@ if(isset($_POST)){
             $title = "Your Query";
             $sql = mysqli_real_escape_string($db, $_POST['query']);
             $html = '<table>';
-            //$html .= $queries[$queryType]['initHtml'];
         
         } else {
-        
             $queryType = $_POST['query'];
-            
             $title = $queries[$queryType]['title'];
             $sql = $queries[$queryType]['sql'];
-            $html = '<table>';
-            $html .= $queries[$queryType]['initHtml'];
-        
+            $html = '<table><tr>';        
         }
         
-        if(!$result = $db->query($sql)){
-            die('There was an error running the query [' . $db->error . ']');
-        }
-        while($battle = $result->fetch_assoc()){
-            $html .= '<tr>';
-            foreach ($battle as $column){
-                    $html .= '<td>';
-                    $html .= $column;
-                    $html .= '</td>';
-            }
+        if(!$sql || !$result = $db->query($sql)){
+            $error = 'There was an error running the query: "' .$sql . '" [' . $db->error . ']</br></br>';
+        } else {
+            $fields = $result->fetch_fields();
+                foreach ($fields as $field){
+                    $html .= '<th>';
+                    $html .= $field->name;
+                    $html .= '</th>';
+                }
             $html .= '</tr>';
+            while($battle = $result->fetch_assoc()){
+                $html .= '<tr>';
+                foreach ($battle as $column){
+                        $html .= '<td>';
+                        $html .= $column;
+                        $html .= '</td>';
+                }
+                $html .= '</tr>';
+            }
+            $html .= '</table>';
         }
-        $html .= '</table>';
     } else {
         $title = 'List of Queries';
         $sql = 'List Queries';
@@ -79,6 +83,18 @@ if(isset($_POST)){
     <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
   </head>
   <body>
+      <div class="row">
+      <div class="large-12 columns">
+        <h1>A Database Approach to World War I</h1>
+      </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <a href = "/341/index.php"><div class="small button">Static Queries</div></a>
+            <a href = "/341/dynamicIndex.php"><div class="small button">Dynamic Queries</div></a>
+            <a href = "/341/createYourOwn.php"><div class="small button">User Generated Queries</div></a>
+        </div>
+    </div>
     <div class="row">
       <div class="large-12 columns">
         <h1><?php echo($title);?></h1>
@@ -89,13 +105,18 @@ if(isset($_POST)){
       <div class="large-12 columns">
         <h2>Your result is: </h2>
         <?php
-            echo("Your query is: " . $sql .";");
-            echo("</br></br>");
-            echo($html);
-            if($result){
-                $result->free();
+            if($error){
+                echo($error);
+            } else {
+                echo("Your query is: " . $sql .";");
+                echo("</br></br>");
+                echo($html);
+                if($result){
+                    $result->free();
+                }
             }
             $db->close();
+            
         ?>
       </div>
     </div>
