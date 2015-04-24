@@ -5,19 +5,37 @@ if(isset($_POST)){
     //    new mysqli('server'   ,'username' ,'password','db name');
     $db = new mysqli('localhost','read_only','password','341Project');
     $result = "";
-    $queries = getStaticQueries();
+    if($_POST['type'] == 'static'){
+        $queries = getStaticQueries();
+        $hrefBack = 'index.php';    
+    } else if($_POST['type'] == 'dynamic'){
+        $hrefBack = 'dynamicIndex.php';
+        $queries = getDynamicQueries($db);
+    } else if($_POST['type'] == 'userQuery'){
+        $hrefBack = 'createYourOwn.php';
+    }
     if ($db->connect_errno > 0) {
         die('Could not connect: ' . $db->connect_error);
     }
     
     if($_POST['query'] != 'showAllQueries'){
-      
-        $queryType = $_POST['query'];
+        if($_POST['type'] == 'userQuery'){
         
-        $title = $queries[$queryType]['title'];
-        $sql = $queries[$queryType]['sql'];
-        $html = '<table>';
-        $html .= $queries[$queryType]['initHtml'];
+            $title = "Your Query";
+            $sql = mysqli_real_escape_string($db, $_POST['query']);
+            $html = '<table>';
+            //$html .= $queries[$queryType]['initHtml'];
+        
+        } else {
+        
+            $queryType = $_POST['query'];
+            
+            $title = $queries[$queryType]['title'];
+            $sql = $queries[$queryType]['sql'];
+            $html = '<table>';
+            $html .= $queries[$queryType]['initHtml'];
+        
+        }
         
         if(!$result = $db->query($sql)){
             die('There was an error running the query [' . $db->error . ']');
@@ -83,7 +101,7 @@ if(isset($_POST)){
     </div>
     <div class="row">
         <div class="large-12 columns">
-            <a href="/341/index.php" class="button">Choose Another Query</a>
+            <a href="/341/<?php echo($hrefBack); ?>" class="button">Choose Another Query</a>
         </div>
     </div>
     </body>

@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html class="no-js" lang="en">
   <head>
     <meta charset="utf-8" />
@@ -22,32 +22,22 @@
             <a href = "/341/createYourOwn.php"><div class="small button">User Generated Queries</div></a>
         </div>
     </div>
-        <div class="row">
+    
+    <div class="row">
       <div class="large-12 columns">
-        <h2>Static Queries</h2>
-        <h3>Please select a query.</h3>
+        <h2>User Generated Queries</h2>
+        <h3>Please enter your own "SELECT" query.</h3>
       </div>
     </div>
     
     <form method="post" action="result.php">
         <div class="row">
         <div class="large-12 columns">
-          <input type="radio" name="query" value="showAllQueries" ><label for="query">List of All SQL Queries</label>
+          <textarea name="query" placeholder="enter query..."></textarea>
         </div>
-        <?php
-            require("queries.php");
-            $i = 0;
-            $queries = getStaticQueries();
-            $keys = array_keys($queries);
-            foreach($queries as $query){
-               echo('
-                <div class="large-12 columns">
-                    <input type="radio" name="query" value="'.$keys[$i].'" ><label for="query">'. $query["title"].'</label>
-                </div>');
-                $i++;
-            }
-        ?>
-        <input type="hidden" name="type" value="static">
+        <div class="large-12 columns">
+          <input type="hidden" name="type" value="userQuery">
+        </div>
         <div class="row">
             <div class="large-12 columns">
                 <input type ="submit" <div  name="submit" class="small button"></div></input>
