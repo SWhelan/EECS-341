@@ -1,15 +1,3 @@
-<!doctype html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>World War I</title>
-    <link rel="stylesheet" href="css/foundation.css" />
-    <script src="js/vendor/modernizr.js"></script>
-    <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-    </head>
-  <body>
-    
   <?php require("templates.php");?>
     <?php echo(getHeader());?>
     

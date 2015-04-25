@@ -17,9 +17,8 @@ if(isset($_POST)){
         $hrefBack = 'createYourOwn.php';
     }
     if ($db->connect_errno > 0) {
-        die('Could not connect: ' . $db->connect_error);
+        $erro .= 'Could not connect: ' . $db->connect_error;
     }
-    
     if($_POST['query'] != 'showAllQueries'){
         if($_POST['type'] == 'userQuery'){
         
@@ -27,15 +26,15 @@ if(isset($_POST)){
             $sql = mysqli_real_escape_string($db, $_POST['query']);
             $html = '<table>';
         
-        } else {
+        } else if($_POST['query'] != ""){
             $queryType = $_POST['query'];
             $title = $queries[$queryType]['title'];
             $sql = $queries[$queryType]['sql'];
             $html = '<table><tr>';        
-        }
+        } 
         
         if(!$sql || !$result = $db->query($sql)){
-            $error = 'There was an error running the query: "' .$sql . '" [' . $db->error . ']</br></br>';
+            $error .= 'There was an error running the query: "' .$sql . '" [' . $db->error . ']</br></br>';
         } else {
             $fields = $result->fetch_fields();
                 foreach ($fields as $field){
@@ -73,22 +72,6 @@ if(isset($_POST)){
     }
 }
 ?>
-
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Result</title>
-    <link rel="stylesheet" href="css/foundation.css" />
-    <script src="js/vendor/modernizr.js"></script>
-    <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-  </head>
-  <body>
-      <div class="row">
-      <div class="large-12 columns">
-        <h1>A Database Approach to World War I</h1>
-      </div>
-    </div>
     <?php echo(getHeader());?>
     <div class="row">
       <div class="large-12 columns">

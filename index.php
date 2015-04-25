@@ -1,14 +1,3 @@
-<!doctype html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>World War I</title>
-    <link rel="stylesheet" href="css/foundation.css" />
-    <script src="js/vendor/modernizr.js"></script>
-    <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-    </head>
-  <body>
   <?php require("templates.php");?>
     <?php echo(getHeader());?>
         <div class="row">
@@ -21,7 +10,7 @@
     <form method="post" action="result.php">
         <div class="row">
         <div class="large-12 columns">
-          <input type="radio" name="query" value="showAllQueries" ><label for="query">List of All SQL Queries</label>
+          <input type="radio" checked="checked" name="query" value="showAllQueries" ><label for="query">List of All SQL Queries</label>
         </div>
         <?php
             require("queries.php");
