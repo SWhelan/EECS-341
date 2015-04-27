@@ -94,7 +94,6 @@ if(isset($_POST)){
                 }
             }
             $db->close();
-            
         ?>
       </div>
     </div>
