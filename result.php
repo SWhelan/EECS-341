@@ -17,7 +17,7 @@ if(isset($_POST)){
         $hrefBack = 'createYourOwn.php';
     }
     if ($db->connect_errno > 0) {
-        $erro .= 'Could not connect: ' . $db->connect_error;
+        $error .= 'Could not connect: ' . $db->connect_error;
     }
     if($_POST['query'] != 'showAllQueries'){
         if($_POST['type'] == 'userQuery'){

@@ -1,4 +1,6 @@
-A Database Approach to World War 1
+A Database Approach to World War I
+
+4/27/2015
 
 Leah Neustadt - lcn12@case.edu
 Ryan Nowacoski - rmn36@case.edu
