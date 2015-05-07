@@ -1,4 +1,4 @@
-<?php
+<?php/*
     $db = new mysqli('localhost','root','','341Project');
 
     if ($db->connect_errno > 0) {
@@ -67,7 +67,7 @@ while (($data = fgetcsv($file)) !== FALSE) {
     }
     $sql6 = "INSERT INTO `341project`.`participates_in_conflict` (`conflict_id`, `alliance_id`, `enter_date`, `exit_date`, `status`, `location`) VALUES ('".$conflictId."', '".$allianceLoseId."', '".$conflict['start_date']."', '".$conflict['end_date']."', 'lose', NULL)";
     $db->query($sql6);*/
-    
+    /*
     $conflictId++;
-}
+}*/
 ?>

@@ -4,7 +4,14 @@ if(isset($_POST)){
     require("templates.php");
     
     //    new mysqli('server'   ,'username' ,'password','db name');
-    $db = new mysqli('localhost','read_only','password','341Project');
+    $hostname = "mysql.sarahlouisewhelan.com";  //the hostname you created when creating the database
+$username = "341projectuser";   // the username specified when setting up the database
+$password = "341_project";    // the password specified when setting up the database
+$database = "341project";   // the database name chosen when setting up the database 
+
+$db = mysqli_connect($hostname, $username, $password, $database);
+
+//    $db = new mysqli("mysql.sarahlouisewhelan.com","341projectuser","341_project","341project");
     $result = "";
     $error = "";
     if($_POST['type'] == 'static'){

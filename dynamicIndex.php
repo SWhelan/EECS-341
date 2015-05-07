@@ -1,4 +1,4 @@
-    <?php require("templates.php");?>
+    <?php include("templates.php");?>
     <?php echo(getHeader());?>
     
     <div class="row">

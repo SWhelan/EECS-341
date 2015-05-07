@@ -22,11 +22,6 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `341project` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `341project`;
 
---
--- Create user
---
-CREATE USER 'read_only'@'localhost' IDENTIFIED BY 'password';
-GRANT SELECT ON `341project`.* TO 'read_only'@'localhost';
 
 -- --------------------------------------------------------
 

@@ -24,7 +24,7 @@
     <div class="row">
         <div class="large-12 columns">
           <p>For your convenience here is the schema with the attributes of each relation and foreign key constraints in an easier to view format. If you need help with creating your query the documentation for MySQL is provided <a href = "http://dev.mysql.com/doc/refman/5.5/en/index.html">here.</a></p>
-          <img src="/341/schema.jpg" name="schema"></textarea>
+          <img src="/341/schema.JPG" name="schema"></textarea>
         </div>
     </div>
     

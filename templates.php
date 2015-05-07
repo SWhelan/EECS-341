@@ -4,7 +4,12 @@ function getDropdown($name){
         $html = "<div class = 'large-6 columns'>
             <label>Participant
                 <select name = '".$name."'>";
-                    $db = new mysqli('localhost','read_only','password','341Project');
+                        $hostname = "mysql.sarahlouisewhelan.com";  //the hostname you created when creating the database
+$username = "341projectuser";   // the username specified when setting up the database
+$password = "341_project";    // the password specified when setting up the database
+$database = "341project";   // the database name chosen when setting up the database 
+
+$db = mysqli_connect($hostname, $username, $password, $database);
 
                     if ($db->connect_errno > 0) {
                         die('Could not connect: ' . $db->connect_error);
@@ -46,6 +51,7 @@ function getHeader(){
             <a href = "/341/index.php"><div class="small button">Static Queries</div></a>
             <a href = "/341/dynamicIndex.php"><div class="small button">Dynamic Queries</div></a>
             <a href = "/341/createYourOwn.php"><div class="small button">User Generated Queries</div></a>
+            <a href = "/341/about.php"><div class="small button">About</div></a>
         </div>
     </div>';
     return $html;
